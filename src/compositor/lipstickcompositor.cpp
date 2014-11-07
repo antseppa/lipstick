@@ -137,6 +137,10 @@ void LipstickCompositor::onVisibleChanged(bool visible)
 void LipstickCompositor::componentComplete()
 {
     QWaylandCompositor::setOutputGeometry(QRect(0, 0, width(), height()));
+    QScreen *screen = QGuiApplication::primaryScreen();
+    if (screen) {
+        QWaylandCompositor::setOutputPhysicalSize(screen->physicalSize().toSize());
+    }
 }
 
 void LipstickCompositor::surfaceCreated(QWaylandSurface *surface)
